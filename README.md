@@ -5,6 +5,10 @@
 ## JsPlus
 JS基础扩展库，请移步这里 [JsPlus](//github.com/cuidingfeng/jsplus)
 
+## jQuery-Plug
+一些jQuery插件，请移步这里 [jQuery-Plug](//github.com/cuidingfeng/jquery-plug)
+* `jquery-pause` jQuery链式调用时暂停指定时间再执行后面的操作
+
 ## asyncFunc
 管理异步函数的执行，降低多层异步函数及大量异步函数执行时的复杂度。
 
