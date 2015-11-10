@@ -1,0 +1,23 @@
+{
+  "name": "jsTools",
+  "version": "0.0.1",
+  "description": "一些零散的js小工具",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cuidingfeng/jstools.git"
+  },
+  "keywords": [
+    "javascript",
+    "library"
+  ],
+  "author": "cuidingfeng",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cuidingfeng/jstools/issues",
+    "email": "admin@baiketupu.com"
+  },
+  "homepage": "https://github.com/cuidingfeng/jstools"
+}

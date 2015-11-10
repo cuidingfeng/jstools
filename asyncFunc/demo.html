@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript" src="asyncFunc.js"></script>
+    <script type="text/javascript">
+      var geturl = function(filename, callback){
+        var time = Math.round(Math.random()*5000);
+        setTimeout(callback, time, filename+"-"+time);
+      };
+      var insertDB = function(sql, callback){
+        var time = Math.round(Math.random()*3000);
+        setTimeout(callback, time, sql+"-"+time);
+      }, selectDB = insertDB;
+
+      var evtFile = eventclass(), evtMysql = eventclass();
+      evtFile.listen("getFile", function(data, id){
+        console.log("获取文件成功：" + data + ", 执行次数：" + id);
+        insertDB(data, function(rs){
+          evtMysql.trigger("insert", rs);
+        });
+      });
+      evtFile.listen("getFile2", function(data){
+        console.log("获取文件2成功：" + data);
+        insertDB(data, function(rs){
+          evtMysql.trigger("insert2", rs);
+        });
+      });
+      evtMysql.listen("insert", function(data){
+        console.log("写数据库成功：" + data);
+        selectDB(data, function(rs){
+          evtMysql.trigger("select", rs);
+        });
+      });
+      evtMysql.listen("insert2", function(data, id){
+        console.log("写数据库2成功：" + data + ", 执行次数：" + id);
+      });
+      evtMysql.listen("select", function(rs){
+        console.log("查找数据库成功：" + rs);
+        geturl(rs, function(data){
+          evtFile.trigger("getFile2", data);
+        });
+      });
+      var fileQueue = evtFile.fnQueue(3), startTime = +new Date;
+      for(var i=0;i<100;i++){
+        ~function(i){
+          fileQueue.push(function(queue){
+            geturl("file"+i, function(data){
+              evtFile.trigger("getFile", data);
+              console.log(+new Date - startTime);
+              queue.end();//线程结束
+            });
+          });
+        }(i);
+      }
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>
