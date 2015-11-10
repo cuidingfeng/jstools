@@ -2,6 +2,9 @@
 
 一些零散的JS小工具
 
+## JsPlus
+JS基础扩展库，请移步这里 [JsPlus](//github.com/cuidingfeng/jsplus)
+
 ## asyncFunc
 管理异步函数的执行，降低多层异步函数及大量异步函数执行时的复杂度。
 
